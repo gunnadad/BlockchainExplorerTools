@@ -1,0 +1,37 @@
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+contract BlockchainExplorerTool {
+    // Events
+    event BlockExplored(uint256 indexed blockNumber, uint256 timestamp, uint256 numTransactions);
+    event TransactionExplored(bytes32 indexed txHash, address indexed sender, address indexed receiver, uint256 amount);
+
+    // Explore block details
+    function exploreBlock(uint256 blockNumber) external {
+        (uint256 timestamp, uint256 numTransactions) = getBlockDetails(blockNumber);
+        emit BlockExplored(blockNumber, timestamp, numTransactions);
+    }
+
+    // Explore transaction details
+    function exploreTransaction(bytes32 txHash) external {
+        (address sender, address receiver, uint256 amount) = getTransactionDetails(txHash);
+        emit TransactionExplored(txHash, sender, receiver, amount);
+    }
+
+    // Get block details (example: simplified function)
+    function getBlockDetails(uint256 blockNumber) internal view returns (uint256 timestamp, uint256 numTransactions) {
+        // Simulated logic to fetch block details
+        timestamp = block.timestamp; // Replace with actual block timestamp retrieval
+        numTransactions = block.transactions.length; // Replace with actual transaction count retrieval
+        return (timestamp, numTransactions);
+    }
+
+    // Get transaction details (example: simplified function)
+    function getTransactionDetails(bytes32 txHash) internal view returns (address sender, address receiver, uint256 amount) {
+        // Simulated logic to fetch transaction details
+        sender = address(txHash); // Replace with actual sender address retrieval
+        receiver = address(0); // Replace with actual receiver address retrieval
+        amount = 1 ether; // Replace with actual transaction amount retrieval
+        return (sender, receiver, amount);
+    }
+}
